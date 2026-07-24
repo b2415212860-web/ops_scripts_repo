@@ -72,7 +72,9 @@ pipeline {
             echo '检查未通过，请修复错误后重新提交'
         }
         always {
-            cleanWs()
+            node('shell-agent') {
+                cleanWs()
+            }
         }
     }
 }
