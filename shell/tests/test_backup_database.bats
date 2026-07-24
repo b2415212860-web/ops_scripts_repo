@@ -13,7 +13,7 @@ echo "CREATE TABLE test (id INT);"
 EOF
     chmod +x "${TEST_DIR}/bin/pg_dump"
     export PATH="${TEST_DIR}/bin:$PATH"
-    # 加载被测脚本中的函数
+    # 加载被测脚本中的函数（函数模式下 source 只定义不执行）
     source shell/backup_database.sh 2>/dev/null || true
 }
 
@@ -27,6 +27,7 @@ teardown() {
 }
 
 @test "备份文件正确生成" {
+    run bash shell/backup_database.sh testdb "${BACKUP_DIR}"
     [ "$status" -eq 0 ]
     ls "${BACKUP_DIR}"/testdb_*.sql.gz | wc -l | grep -q "^1$"
 }
