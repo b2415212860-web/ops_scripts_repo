@@ -8,7 +8,7 @@ pipeline {
     stages {
         // Stage 1: 拉取代码
         stage('拉取代码') {
-            agent { label 'main' }
+            agent { label 'master' }
             steps {
                 checkout scm
                 echo "代码拉取成功，当前分支: ${env.GIT_BRANCH}"
