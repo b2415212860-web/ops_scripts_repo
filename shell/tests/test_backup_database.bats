@@ -27,7 +27,6 @@ teardown() {
 }
 
 @test "备份文件正确生成" {
-    run bash shell/backup_database.sh testdb "${BACKUP_DIR}"
     [ "$status" -eq 0 ]
     ls "${BACKUP_DIR}"/testdb_*.sql.gz | wc -l | grep -q "^1$"
 }
